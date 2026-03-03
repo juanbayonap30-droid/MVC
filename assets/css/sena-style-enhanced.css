@@ -1,0 +1,599 @@
+/* Mejoras de diseño para el proyecto SENA */
+
+/* Animaciones suaves */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Mejoras al body */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    overflow-x: hidden;
+}
+
+/* Mejoras al sidebar */
+.sidebar {
+    box-shadow: 4px 0 20px rgba(57, 169, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-logo {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.sidebar-title h1 {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.sidebar-user {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 12px;
+    margin: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.sidebar-user-icon {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.sidebar-menu ul li a {
+    border-radius: 8px;
+    margin: 4px 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-menu ul li a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: rgba(255, 255, 255, 0.1);
+    transition: width 0.3s ease;
+}
+
+.sidebar-menu ul li a:hover::before {
+    width: 100%;
+}
+
+.sidebar-menu ul li a:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.sidebar-menu ul li a.active {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transform: translateX(5px);
+}
+
+/* Mejoras al contenido principal */
+.main-content {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mejoras al header */
+.header-sena {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-sena::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sena-verde) 0%, var(--sena-verde-claro) 100%);
+}
+
+.header-sena h2 {
+    color: var(--sena-verde-oscuro);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Mejoras a las tarjetas */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 18px 24px;
+    border-bottom: 3px solid rgba(255,255,255,0.2);
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-30%, -30%); }
+}
+
+.card-header h3 {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Mejoras a las tablas */
+.table-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.table {
+    box-shadow: none;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+    position: relative;
+}
+
+.table thead th {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    padding: 16px 20px;
+}
+
+.table thead th:first-child {
+    border-radius: 0;
+}
+
+.table thead th:last-child {
+    border-radius: 0;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e8ecf1;
+    background: #ffffff;
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(90deg, rgba(57, 169, 0, 0.08) 0%, rgba(57, 169, 0, 0.03) 100%);
+    transform: scale(1.005);
+    box-shadow: 0 4px 12px rgba(57, 169, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.table tbody td {
+    padding: 16px 20px;
+    border: none;
+    vertical-align: middle;
+}
+
+.table tbody tr:first-child td:first-child {
+    border-top-left-radius: 0;
+}
+
+.table tbody tr:first-child td:last-child {
+    border-top-right-radius: 0;
+}
+
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Mejoras a los botones */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--sena-gris) 0%, #4a5568 100%);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+/* Mejoras a los formularios */
+.form-group {
+    margin-bottom: 20px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.form-group label {
+    color: var(--sena-verde-oscuro);
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--sena-verde);
+    box-shadow: 0 0 0 4px rgba(57, 169, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Mejoras a las alertas */
+.alert {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 4px solid;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    border-left-color: #27ae60;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.alert-error {
+    border-left-color: #e74c3c;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+}
+
+/* Mejoras al estado vacío */
+.empty-state {
+    padding: 4rem 2rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.empty-state p {
+    font-size: 1.3rem;
+    color: var(--sena-gris);
+    margin-bottom: 2rem;
+}
+
+/* Mejoras al footer */
+.footer-sena {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    border-radius: 12px 12px 0 0;
+}
+
+/* Mejoras a los modales */
+.modal {
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-close {
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg) scale(1.2);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mejoras al calendario */
+.calendar-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.calendar-header {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+}
+
+.calendar-day {
+    transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+/* Efectos de carga */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-verde-oscuro) 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sena-verde-oscuro);
+}
+
+/* Responsive mejoras */
+@media (max-width: 768px) {
+    .card:hover {
+        transform: none;
+    }
+    
+    .table tbody tr:hover {
+        transform: none;
+    }
+}
+
+
+/* Mejoras adicionales para tablas con espaciado */
+.table tbody tr {
+    margin-bottom: 4px;
+}
+
+.table tbody td:first-child {
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.table tbody tr:hover td:first-child {
+    border-left-color: var(--sena-verde);
+}
+
+/* Alternancia de colores suave */
+.table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.table tbody tr:nth-child(even):hover {
+    background: linear-gradient(90deg, rgba(57, 169, 0, 0.08) 0%, rgba(57, 169, 0, 0.03) 100%);
+}
+
+/* Mejora de botones en tablas */
+.table-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-actions .btn {
+    min-width: 100px;
+}
+
+/* Mejora del contenedor de tabla */
+.table-container {
+    background: #ffffff;
+    padding: 0;
+}
+
+/* Sombra interna sutil en el contenedor */
+.card .table-container {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Mejora de celdas con números */
+.table tbody td:first-child {
+    font-weight: 600;
+    color: var(--sena-verde-oscuro);
+}
+
+/* Estilo para filas vacías */
+.table tbody tr td[colspan] {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Animación de carga para tablas */
+@keyframes tableRowLoad {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.table tbody tr {
+    animation: tableRowLoad 0.4s ease-out;
+}
+
+/* Mejora de headers de tabla */
+.table thead th {
+    position: relative;
+    user-select: none;
+}
+
+.table thead th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+}
+
+/* Responsive: mejor visualización en móviles */
+@media (max-width: 768px) {
+    .table tbody tr:hover {
+        transform: none;
+    }
+    
+    .table tbody td {
+        padding: 12px 16px;
+    }
+    
+    .table thead th {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+}

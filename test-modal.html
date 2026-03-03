@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modal</title>
+    <link rel="stylesheet" href="assets/css/sena-style.css">
+    <link rel="stylesheet" href="assets/css/modal-panel.css">
+</head>
+<body>
+    <div style="padding: 2rem;">
+        <h1>Prueba del Modal Panel</h1>
+        <button onclick="verDetallesInstructor('1001', 'Juan Carlos', 'Pérez García', 'juan.perez@sena.edu.co', '3001234567')" class="btn btn-primary">
+            Abrir Modal de Prueba
+        </button>
+    </div>
+
+    <!-- Modal de Detalles del Instructor -->
+    <div id="instructorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📋 Detalles del Instructor</h3>
+                <button class="modal-close" onclick="cerrarModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info-item">
+                    <div class="modal-info-label">ID Instructor</div>
+                    <div class="modal-info-value" id="modal-inst-id">-</div>
+                </div>
+                <div class="modal-info-item">
+                    <div class="modal-info-label">Nombres</div>
+                    <div class="modal-info-value" id="modal-inst-nombres">-</div>
+                </div>
+                <div class="modal-info-item">
+                    <div class="modal-info-label">Apellidos</div>
+                    <div class="modal-info-value" id="modal-inst-apellidos">-</div>
+                </div>
+                <div class="modal-info-item">
+                    <div class="modal-info-label">Correo Electrónico</div>
+                    <div class="modal-info-value" id="modal-inst-correo">-</div>
+                </div>
+                <div class="modal-info-item">
+                    <div class="modal-info-label">Teléfono</div>
+                    <div class="modal-info-value" id="modal-inst-telefono">-</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-aprobar">Aprobar</button>
+                <button class="btn-rechazar">Rechazar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/modal.js"></script>
+</body>
+</html>

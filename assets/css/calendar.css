@@ -1,0 +1,441 @@
+/* Calendario de Asignaciones - Estilo SENA */
+
+.calendar-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #39A900;
+}
+
+.calendar-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.calendar-navigation {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.calendar-nav-btn {
+    background: #39A900;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+    background: #2E8B00;
+    transform: scale(1.05);
+}
+
+.calendar-today-btn {
+    background: #f8f9fa;
+    color: #39A900;
+    border: 2px solid #39A900;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.calendar-today-btn:hover {
+    background: #39A900;
+    color: white;
+}
+
+.calendar-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #39A900;
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #39A900;
+}
+
+/* Grid del calendario */
+.calendar-grid {
+    display: block;
+    width: 100%;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: 600;
+    color: #39A900;
+    padding: 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    position: relative;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.calendar-day:hover {
+    border-color: #39A900;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(57, 169, 0, 0.2);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-day.empty:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.calendar-day.today {
+    background: #e8f5e9;
+    border-color: #39A900;
+    border-width: 3px;
+}
+
+.calendar-day.today .day-number {
+    background: #39A900;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day.has-assignment {
+    background: #e8f5e9;
+    border-color: #39A900;
+}
+
+.day-number {
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.assignment-indicators {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #39A900;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.start-dot {
+    background: #39A900;
+}
+
+.end-dot {
+    background: #dc3545;
+}
+
+.assignment-badge {
+    display: none;
+}
+
+.assignment-bar {
+    display: none;
+}
+
+.assignment-count {
+    display: none;
+}
+
+/* Modal de asignación */
+.assignment-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.assignment-modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.assignment-modal-header {
+    background: #39A900;
+    color: white;
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+}
+
+.assignment-modal-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+}
+
+.assignment-modal-header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.assignment-modal-body {
+    padding: 24px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #39A900;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.assignment-modal-footer {
+    padding: 20px 24px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 0 0 12px 12px;
+}
+
+.modal-btn-cancel {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-btn-cancel:hover {
+    background: #5a6268;
+}
+
+.modal-btn-save {
+    background: #39A900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-btn-save:hover {
+    background: #2E8B00;
+}
+
+/* Filtro de fichas */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-header h3 {
+    margin: 0 0 16px 0;
+    color: #39A900;
+    font-size: 18px;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #39A900;
+}
+
+/* Lista de asignaciones en modal de detalles */
+.assignment-item {
+    background: #f8f9fa;
+    border-left: 4px solid #39A900;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.assignment-info {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.assignment-info strong {
+    color: #39A900;
+    font-weight: 600;
+}
+
+.assignment-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-edit {
+    background: #39A900;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #2E8B00;
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+#assignments-list:empty::after {
+    content: 'No hay asignaciones para este día';
+    display: block;
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}

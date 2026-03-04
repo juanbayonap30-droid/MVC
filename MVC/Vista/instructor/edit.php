@@ -85,6 +85,25 @@
             border-color: #39A900;
         }
         
+        .form-group select {
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .form-group select:focus {
+            outline: none;
+            border-color: #39A900;
+            box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.1);
+        }
+        
+        .form-group select:hover {
+            border-color: #39A900;
+        }
+        
         .form-actions {
             display: flex;
             gap: 1rem;
@@ -195,6 +214,27 @@
                                 title="Ingrese 10 dígitos"
                                 required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="centro_formacion_id">
+                                Centro de Formación<span class="required">*</span>
+                            </label>
+                            <select 
+                                id="centro_formacion_id" 
+                                name="centro_formacion_id" 
+                                required>
+                                <option value="">Seleccione un centro</option>
+                                <?php
+                                require_once 'MVC/Modelo/CentroFormacion.php';
+                                $centros = CentroFormacion::all();
+                                foreach ($centros as $centro): ?>
+                                    <option value="<?= $centro->getCentId() ?>" 
+                                        <?= ($instructor->getCentroFormacionId() == $centro->getCentId()) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($centro->getCentNombre()) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-actions">
@@ -218,8 +258,9 @@
             const apellidos = document.getElementById('inst_apellidos').value.trim();
             const correo = document.getElementById('inst_correo').value.trim();
             const telefono = document.getElementById('inst_telefono').value.trim();
+            const centroId = document.getElementById('centro_formacion_id').value;
             
-            if (!nombres || !apellidos || !correo || !telefono) {
+            if (!nombres || !apellidos || !correo || !telefono || !centroId) {
                 e.preventDefault();
                 alert('Por favor complete todos los campos obligatorios');
                 return false;
@@ -239,7 +280,7 @@
         });
         
         // Agregar efectos visuales
-        document.querySelectorAll('input').forEach(element => {
+        document.querySelectorAll('input, select').forEach(element => {
             element.addEventListener('focus', function() {
                 this.style.transform = 'scale(1.01)';
             });

@@ -38,7 +38,9 @@ class InstructorController
                 $_POST['inst_nombres'],
                 $_POST['inst_apellidos'],
                 $_POST['inst_correo'],
-                $_POST['inst_telefono']
+                $_POST['inst_telefono'],
+                null, // password
+                $_POST['centro_formacion_id'] ?? null
             );
             Instructor::save($instructor);
             header('Location: index.php?controller=instructor&action=index');
@@ -64,7 +66,9 @@ class InstructorController
                 $_POST['inst_nombres'],
                 $_POST['inst_apellidos'],
                 $_POST['inst_correo'],
-                $_POST['inst_telefono']
+                $_POST['inst_telefono'],
+                null, // password
+                $_POST['centro_formacion_id'] ?? null
             );
             Instructor::update($instructor);
             header('Location: index.php?controller=instructor&action=index');

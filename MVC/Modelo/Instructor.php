@@ -47,8 +47,8 @@ class Instructor
         try {
             $db = getDB();
             $insert = $db->prepare(
-                'INSERT INTO instructor (inst_id, inst_nombres, inst_apellidos, inst_correo, inst_telefono, inst_password)
-                 VALUES (:inst_id, :inst_nombres, :inst_apellidos, :inst_correo, :inst_telefono, :inst_password)'
+                'INSERT INTO instructor (inst_id, inst_nombres, inst_apellidos, inst_correo, inst_telefono, inst_password, CENTRO_FORMACION_cent_id)
+                 VALUES (:inst_id, :inst_nombres, :inst_apellidos, :inst_correo, :inst_telefono, :inst_password, :centro_formacion_id)'
             );
             $insert->bindValue('inst_id', $instructor->getInstId());
             $insert->bindValue('inst_nombres', $instructor->getInstNombres());
@@ -56,6 +56,7 @@ class Instructor
             $insert->bindValue('inst_correo', $instructor->getInstCorreo());
             $insert->bindValue('inst_telefono', $instructor->getInstTelefono());
             $insert->bindValue('inst_password', $instructor->getInstPassword());
+            $insert->bindValue('centro_formacion_id', $instructor->getCentroFormacionId());
             $insert->execute();
         } catch (PDOException $e) {
             error_log("Error en Instructor::save() - " . $e->getMessage());
@@ -137,13 +138,15 @@ class Instructor
                  SET inst_nombres = :inst_nombres,
                      inst_apellidos = :inst_apellidos,
                      inst_correo = :inst_correo,
-                     inst_telefono = :inst_telefono
+                     inst_telefono = :inst_telefono,
+                     CENTRO_FORMACION_cent_id = :centro_formacion_id
                  WHERE inst_id = :inst_id'
             );
             $update->bindValue('inst_nombres', $instructor->getInstNombres());
             $update->bindValue('inst_apellidos', $instructor->getInstApellidos());
             $update->bindValue('inst_correo', $instructor->getInstCorreo());
             $update->bindValue('inst_telefono', $instructor->getInstTelefono());
+            $update->bindValue('centro_formacion_id', $instructor->getCentroFormacionId());
             $update->bindValue('inst_id', $instructor->getInstId());
             $update->execute();
         } catch (PDOException $e) {

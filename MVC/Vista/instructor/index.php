@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    <script src="assets/js/modal.js"></script>
+    <script src="assets/js/modal.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/sena-enhanced.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

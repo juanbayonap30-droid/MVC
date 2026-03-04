@@ -62,8 +62,14 @@ class ModalManager {
         
         // Actualizar centro de formación
         const centroElement = document.getElementById('modal-inst-centro');
+        console.log('Elemento centro encontrado:', centroElement);
+        console.log('Valor del centro:', instructor.centro);
         if (centroElement) {
-            centroElement.textContent = instructor.centro || 'Sin asignar';
+            const centroValue = instructor.centro || 'Sin asignar';
+            centroElement.textContent = centroValue;
+            console.log('Centro asignado al elemento:', centroValue);
+        } else {
+            console.error('No se encontró el elemento modal-inst-centro');
         }
 
         this.openModal('instructorModal');
@@ -194,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Funciones globales para usar desde HTML
 function verDetallesInstructor(id, nombres, apellidos, correo, telefono, centro) {
     console.log('Abriendo modal instructor:', id);
+    console.log('Centro de formación recibido:', centro);
     window.modalManager.showInstructorDetails({
         id: id,
         nombres: nombres,

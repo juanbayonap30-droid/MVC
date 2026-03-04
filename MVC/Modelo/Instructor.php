@@ -69,7 +69,8 @@ class Instructor
             $db = getDB();
             $lista = [];
             $select = $db->query('
-                SELECT i.*, cf.cent_nombre as centro_nombre 
+                SELECT i.*, 
+                       COALESCE(cf.cent_nombre, "Sin asignar") as centro_nombre 
                 FROM instructor i
                 LEFT JOIN centro_formacion cf ON i.CENTRO_FORMACION_cent_id = cf.cent_id
             ');
@@ -83,7 +84,7 @@ class Instructor
                     $row['inst_telefono'],
                     $row['inst_password'] ?? null,
                     $row['CENTRO_FORMACION_cent_id'] ?? null,
-                    $row['centro_nombre'] ?? 'Sin asignar'
+                    $row['centro_nombre']
                 );
             }
             return $lista;
@@ -98,7 +99,8 @@ class Instructor
         try {
             $db = getDB();
             $select = $db->prepare('
-                SELECT i.*, cf.cent_nombre as centro_nombre 
+                SELECT i.*, 
+                       COALESCE(cf.cent_nombre, "Sin asignar") as centro_nombre 
                 FROM instructor i
                 LEFT JOIN centro_formacion cf ON i.CENTRO_FORMACION_cent_id = cf.cent_id
                 WHERE i.inst_id = :inst_id
@@ -116,7 +118,7 @@ class Instructor
                     $row['inst_telefono'],
                     $row['inst_password'] ?? null,
                     $row['CENTRO_FORMACION_cent_id'] ?? null,
-                    $row['centro_nombre'] ?? 'Sin asignar'
+                    $row['centro_nombre']
                 );
             }
             return null;

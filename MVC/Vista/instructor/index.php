@@ -62,7 +62,8 @@
                                                 '<?= htmlspecialchars($instructor->getInstNombres()) ?>',
                                                 '<?= htmlspecialchars($instructor->getInstApellidos()) ?>',
                                                 '<?= htmlspecialchars($instructor->getInstCorreo()) ?>',
-                                                '<?= htmlspecialchars($instructor->getInstTelefono()) ?>'
+                                                '<?= htmlspecialchars($instructor->getInstTelefono()) ?>',
+                                                '<?= htmlspecialchars($instructor->getCentroFormacionNombre() ?? 'Sin asignar') ?>'
                                             )" class="btn btn-primary btn-sm">Ver Detalles</button>
                                         </div>
                                     </td>
@@ -138,6 +139,10 @@
                     <div class="detail-card">
                         <div class="detail-label">Teléfono</div>
                         <div class="detail-value" id="modal-inst-telefono">-</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-label">Centro de Formación</div>
+                        <div class="detail-value" id="modal-inst-centro">-</div>
                     </div>
                     <div class="detail-card">
                         <div class="detail-label">Estado del Registro</div>

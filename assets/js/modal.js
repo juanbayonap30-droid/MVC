@@ -59,6 +59,12 @@ class ModalManager {
         document.getElementById('modal-inst-apellidos').textContent = instructor.apellidos;
         document.getElementById('modal-inst-correo').textContent = instructor.correo;
         document.getElementById('modal-inst-telefono').textContent = instructor.telefono;
+        
+        // Actualizar centro de formación
+        const centroElement = document.getElementById('modal-inst-centro');
+        if (centroElement) {
+            centroElement.textContent = instructor.centro || 'Sin asignar';
+        }
 
         this.openModal('instructorModal');
     }
@@ -186,14 +192,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Funciones globales para usar desde HTML
-function verDetallesInstructor(id, nombres, apellidos, correo, telefono) {
+function verDetallesInstructor(id, nombres, apellidos, correo, telefono, centro) {
     console.log('Abriendo modal instructor:', id);
     window.modalManager.showInstructorDetails({
         id: id,
         nombres: nombres,
         apellidos: apellidos,
         correo: correo,
-        telefono: telefono
+        telefono: telefono,
+        centro: centro || 'Sin asignar'
     });
 }
 

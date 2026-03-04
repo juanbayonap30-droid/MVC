@@ -7,8 +7,10 @@ class Instructor
     private $inst_correo;
     private $inst_telefono;
     private $inst_password;
+    private $centro_formacion_id;
+    private $centro_formacion_nombre;
 
-    public function __construct($inst_id, $inst_nombres, $inst_apellidos, $inst_correo, $inst_telefono, $inst_password = null)
+    public function __construct($inst_id, $inst_nombres, $inst_apellidos, $inst_correo, $inst_telefono, $inst_password = null, $centro_formacion_id = null, $centro_formacion_nombre = null)
     {
         $this->inst_id = $inst_id;
         $this->inst_nombres = $inst_nombres;
@@ -16,6 +18,8 @@ class Instructor
         $this->inst_correo = $inst_correo;
         $this->inst_telefono = $inst_telefono;
         $this->inst_password = $inst_password;
+        $this->centro_formacion_id = $centro_formacion_id;
+        $this->centro_formacion_nombre = $centro_formacion_nombre;
     }
 
     // Getters
@@ -26,6 +30,8 @@ class Instructor
     public function getInstCorreo() { return $this->inst_correo; }
     public function getInstTelefono() { return $this->inst_telefono; }
     public function getInstPassword() { return $this->inst_password; }
+    public function getCentroFormacionId() { return $this->centro_formacion_id; }
+    public function getCentroFormacionNombre() { return $this->centro_formacion_nombre; }
 
     // Setters
     public function setInstId($inst_id) { $this->inst_id = $inst_id; }
@@ -62,7 +68,11 @@ class Instructor
         try {
             $db = getDB();
             $lista = [];
-            $select = $db->query('SELECT * FROM instructor');
+            $select = $db->query('
+                SELECT i.*, cf.cent_nombre as centro_nombre 
+                FROM instructor i
+                LEFT JOIN centro_formacion cf ON i.CENTRO_FORMACION_cent_id = cf.cent_id
+            ');
 
             foreach ($select->fetchAll(PDO::FETCH_ASSOC) as $row) {
                 $lista[] = new Instructor(
@@ -71,7 +81,9 @@ class Instructor
                     $row['inst_apellidos'],
                     $row['inst_correo'],
                     $row['inst_telefono'],
-                    $row['inst_password'] ?? null
+                    $row['inst_password'] ?? null,
+                    $row['CENTRO_FORMACION_cent_id'] ?? null,
+                    $row['centro_nombre'] ?? 'Sin asignar'
                 );
             }
             return $lista;
@@ -85,7 +97,12 @@ class Instructor
     {
         try {
             $db = getDB();
-            $select = $db->prepare('SELECT * FROM instructor WHERE inst_id = :inst_id');
+            $select = $db->prepare('
+                SELECT i.*, cf.cent_nombre as centro_nombre 
+                FROM instructor i
+                LEFT JOIN centro_formacion cf ON i.CENTRO_FORMACION_cent_id = cf.cent_id
+                WHERE i.inst_id = :inst_id
+            ');
             $select->bindValue('inst_id', $inst_id);
             $select->execute();
 
@@ -97,7 +114,9 @@ class Instructor
                     $row['inst_apellidos'],
                     $row['inst_correo'],
                     $row['inst_telefono'],
-                    $row['inst_password'] ?? null
+                    $row['inst_password'] ?? null,
+                    $row['CENTRO_FORMACION_cent_id'] ?? null,
+                    $row['centro_nombre'] ?? 'Sin asignar'
                 );
             }
             return null;

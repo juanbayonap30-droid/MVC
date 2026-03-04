@@ -42,7 +42,10 @@ class ModalManager {
 
     showInstructorDetails(instructor) {
         const modal = document.getElementById('instructorModal');
-        if (!modal) return;
+        if (!modal) {
+            console.error('Modal instructorModal no encontrado');
+            return;
+        }
 
         // Almacenar datos actuales
         this.currentData = instructor;
@@ -53,12 +56,21 @@ class ModalManager {
             titleElement.textContent = instructor.id.toString().padStart(3, '0');
         }
 
-        // Actualizar contenido del modal
-        document.getElementById('modal-inst-id').textContent = instructor.id;
-        document.getElementById('modal-inst-nombres').textContent = instructor.nombres;
-        document.getElementById('modal-inst-apellidos').textContent = instructor.apellidos;
-        document.getElementById('modal-inst-correo').textContent = instructor.correo;
-        document.getElementById('modal-inst-telefono').textContent = instructor.telefono;
+        // Actualizar contenido del modal con valores seguros
+        const setTextContent = (id, value) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = value || '-';
+            } else {
+                console.warn(`Elemento ${id} no encontrado`);
+            }
+        };
+
+        setTextContent('modal-inst-id', instructor.id);
+        setTextContent('modal-inst-nombres', instructor.nombres);
+        setTextContent('modal-inst-apellidos', instructor.apellidos);
+        setTextContent('modal-inst-correo', instructor.correo);
+        setTextContent('modal-inst-telefono', instructor.telefono);
         
         // Actualizar centro de formación
         const centroElement = document.getElementById('modal-inst-centro');
@@ -201,13 +213,17 @@ document.addEventListener('DOMContentLoaded', function() {
 function verDetallesInstructor(id, nombres, apellidos, correo, telefono, centro) {
     console.log('Abriendo modal instructor:', id);
     console.log('Centro de formación recibido:', centro);
+    
+    // Asegurar que todos los valores sean strings válidos
+    const centroValue = (centro && centro.trim() !== '') ? centro : 'Sin asignar';
+    
     window.modalManager.showInstructorDetails({
         id: id,
-        nombres: nombres,
-        apellidos: apellidos,
-        correo: correo,
-        telefono: telefono,
-        centro: centro || 'Sin asignar'
+        nombres: nombres || '',
+        apellidos: apellidos || '',
+        correo: correo || '',
+        telefono: telefono || '',
+        centro: centroValue
     });
 }
 

@@ -63,7 +63,7 @@
                                                 '<?= htmlspecialchars($instructor->getInstApellidos()) ?>',
                                                 '<?= htmlspecialchars($instructor->getInstCorreo()) ?>',
                                                 '<?= htmlspecialchars($instructor->getInstTelefono()) ?>',
-                                                '<?= htmlspecialchars($instructor->getCentroFormacionNombre()) ?>'
+                                                '<?= htmlspecialchars($instructor->getCentroFormacionNombre() ?? 'Sin asignar') ?>'
                                             )" class="btn btn-primary btn-sm">Ver Detalles</button>
                                         </div>
                                     </td>

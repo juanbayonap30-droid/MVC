@@ -310,22 +310,65 @@ Administre las competencias de los programas de formación.
 
 ### Gestión de Fichas
 
-Administre las fichas de formación.
+Administre las fichas de formación del centro.
+
+#### Listar Fichas
+
+1. En el menú lateral, haga clic en el ícono de **Fichas** (📁)
+2. Se mostrará una tabla con todas las fichas registradas
+3. Puede ver: ID Ficha, Programa, Instructor Líder, Jornada, y Acciones
 
 #### Crear Nueva Ficha
 
-1. Acceda al módulo de Fichas
-2. Haga clic en **"+ Nueva Ficha"**
-3. Complete:
-   - **ID Ficha:** Número oficial de la ficha
-   - **Programa:** Seleccione de la lista
-   - **Instructor Líder:** Seleccione el instructor responsable
-   - **Jornada:** Seleccione entre:
+1. En la vista de fichas, haga clic en **"+ Nueva Ficha"**
+2. Complete el formulario con la siguiente información:
+   
+   - **ID Ficha:** Número oficial de la ficha (ej: 2558963)
+   - **Programa:** Seleccione el programa de formación de la lista desplegable
+   - **Instructor Líder:** Seleccione el instructor responsable de la ficha
+   - **Jornada:** Seleccione la jornada de formación:
      - Diurna
      - Nocturna
      - Mixta
      - Fin de Semana
-4. Haga clic en **"Guardar Ficha"**
+
+3. Haga clic en **"Guardar Ficha"**
+
+**Validaciones:**
+- El ID de la ficha debe ser único
+- Todos los campos son obligatorios
+- El programa debe existir previamente
+- El instructor líder debe estar registrado
+
+#### Ver Detalles de Ficha
+
+1. En la lista de fichas, haga clic en **"Ver Detalles"**
+2. Se abrirá un modal mostrando:
+   - ID de la Ficha
+   - Programa asociado
+   - Instructor Líder asignado
+   - Jornada de formación
+   - Estado del registro
+   - Fecha de creación
+
+#### Editar Ficha
+
+1. En el modal de detalles, haga clic en **"Editar"**
+2. Modifique los campos necesarios:
+   - Puede cambiar el programa
+   - Puede reasignar el instructor líder
+   - Puede modificar la jornada
+3. Haga clic en **"Actualizar Ficha"**
+
+**Nota:** El ID de la ficha no puede ser modificado una vez creada.
+
+#### Eliminar Ficha
+
+1. En el modal de detalles, haga clic en **"Eliminar"**
+2. Confirme la acción en el mensaje de advertencia
+3. La ficha será eliminada permanentemente
+
+**Advertencia:** Eliminar una ficha puede afectar las asignaciones asociadas.
 
 ---
 
@@ -333,15 +376,84 @@ Administre las fichas de formación.
 
 #### Competencia x Programa
 
-Relacione competencias con programas de formación.
+Este módulo permite relacionar competencias con programas de formación. Es un paso previo necesario antes de asignar competencias a instructores.
 
-**Crear Relación:**
-1. Vaya a **"Comp x Program"**
-2. Haga clic en **"+ Nueva Relación"**
-3. Seleccione:
-   - **Programa:** De la lista disponible
-   - **Competencia:** De la lista disponible
-4. Haga clic en **"Crear Relación"**
+##### Listar Relaciones Competencia-Programa
+
+1. En el menú lateral, haga clic en **"Comp x Program"** (🔗)
+2. Se mostrará una tabla con todas las relaciones existentes
+3. Puede ver: Programa, Competencia, y Acciones disponibles
+
+##### Crear Nueva Relación
+
+1. Haga clic en **"+ Nueva Relación"**
+2. Complete el formulario:
+   
+   - **Programa:** Seleccione el programa de formación de la lista desplegable
+     - Se muestran todos los programas registrados en el sistema
+     - Formato: Código - Nombre del Programa
+   
+   - **Competencia:** Seleccione la competencia a asociar
+     - Se muestran todas las competencias disponibles
+     - Formato: Nombre de la Competencia
+
+3. Haga clic en **"Crear Relación"**
+
+**Validaciones:**
+- Ambos campos son obligatorios
+- La combinación Programa-Competencia debe ser única
+- Si intenta crear una relación duplicada, el sistema mostrará un error
+- El programa debe existir previamente
+- La competencia debe estar registrada
+
+**Importante:** Esta relación es necesaria antes de poder asignar una competencia a un instructor en el módulo "Instru x Compet".
+
+##### Ver Detalles de la Relación
+
+1. En la lista, haga clic en **"Ver Detalles"**
+2. El modal mostrará:
+   - Nombre completo del Programa
+   - Código del Programa
+   - Nombre de la Competencia
+   - Horas de la Competencia
+   - Estado de la relación
+   - Fecha de creación
+
+##### Eliminar Relación
+
+1. En el modal de detalles, haga clic en **"Eliminar"**
+2. Lea el mensaje de advertencia
+3. Confirme la eliminación
+4. La relación será removida del sistema
+
+**Advertencia:** Eliminar esta relación puede afectar las asignaciones de instructores que dependan de ella. Verifique antes de eliminar.
+
+##### Flujo de Trabajo Recomendado
+
+Para una correcta configuración del sistema, siga este orden:
+
+1. **Paso 1:** Cree los **Programas** necesarios en el módulo de Programas
+2. **Paso 2:** Cree las **Competencias** requeridas en el módulo de Competencias
+3. **Paso 3:** Establezca las relaciones en **"Comp x Program"**
+4. **Paso 4:** Asigne competencias a instructores en **"Instru x Compet"**
+5. **Paso 5:** Programe las asignaciones académicas
+
+##### Casos de Uso Comunes
+
+**Ejemplo 1: Programa de Análisis y Desarrollo de Software**
+- Programa: 228106 - Análisis y Desarrollo de Software
+- Competencias asociadas:
+  - Programación Web
+  - Bases de Datos
+  - Desarrollo Móvil
+  - Análisis de Sistemas
+
+**Ejemplo 2: Programa Técnico en Sistemas**
+- Programa: 228172 - Técnico en Sistemas
+- Competencias asociadas:
+  - Mantenimiento de Equipos
+  - Redes de Datos
+  - Soporte Técnico
 
 **Nota:** La combinación Programa-Competencia debe ser única.
 

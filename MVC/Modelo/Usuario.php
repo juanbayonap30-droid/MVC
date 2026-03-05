@@ -29,19 +29,19 @@ class Usuario
         try {
             $db = getDB();
             
-            // Buscar en instructor (usa inst_password)
+            // Buscar en instructor (intenta primero inst_password, luego password)
             $sql = "SELECT inst_id as id, 
                            CONCAT(inst_nombres, ' ', inst_apellidos) as nombre, 
                            inst_correo as correo, 
-                           inst_password as password, 
+                           COALESCE(inst_password, password) as password, 
                            'instructor' as rol 
                     FROM instructor 
                     WHERE (inst_nombres LIKE :busqueda 
                        OR inst_apellidos LIKE :busqueda 
                        OR CONCAT(inst_nombres, ' ', inst_apellidos) LIKE :busqueda
                        OR inst_correo = :correo)
-                       AND inst_password IS NOT NULL
-                       AND inst_password != ''
+                       AND (inst_password IS NOT NULL AND inst_password != '' 
+                            OR password IS NOT NULL AND password != '')
                     LIMIT 1";
             
             $stmt = $db->prepare($sql);
